@@ -30,22 +30,37 @@ class _GrabKitShellState extends State<GrabKitShell> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final panels = widget.runtime.panels;
     if (!widget.runtime.initialized) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return Scaffold(
+        backgroundColor: colorScheme.surface,
+        body: const Center(child: CircularProgressIndicator()),
+      );
     }
     if (panels.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: const Text('GrabKit')),
+        backgroundColor: colorScheme.surface,
+        appBar: AppBar(
+          backgroundColor: colorScheme.surfaceContainer,
+          foregroundColor: colorScheme.onSurface,
+          title: const Text('GrabKit'),
+        ),
         body: const Center(child: Text('No GrabKit modules are enabled.')),
       );
     }
     return DefaultTabController(
       length: panels.length,
       child: Scaffold(
+        backgroundColor: colorScheme.surface,
         appBar: AppBar(
+          backgroundColor: colorScheme.surfaceContainer,
+          foregroundColor: colorScheme.onSurface,
           title: const Text('GrabKit'),
           bottom: TabBar(
+            indicatorColor: colorScheme.onSurface,
+            labelColor: colorScheme.onSurface,
+            unselectedLabelColor: colorScheme.onSurfaceVariant,
             isScrollable: panels.length > 4,
             tabs: [
               for (final panel in panels)

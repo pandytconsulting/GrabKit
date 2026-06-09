@@ -30,6 +30,7 @@ class _GrabKitNetworkPanelState extends State<GrabKitNetworkPanel> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return AnimatedBuilder(
       animation: widget.store,
       builder: (context, _) {
@@ -40,38 +41,43 @@ class _GrabKitNetworkPanelState extends State<GrabKitNetworkPanel> {
         );
         final entries =
             widget.store.entries.where(filter.matches).toList(growable: false);
-        return Column(
-          children: [
-            _toolbar(context, entries.length),
-            Expanded(
-              child: entries.isEmpty
-                  ? Center(
-                      child: Text(
-                        widget.store.entries.isEmpty
-                            ? 'No network calls captured.'
-                            : 'No network calls match the filters.',
+        return ColoredBox(
+          color: colorScheme.surface,
+          child: Column(
+            children: [
+              _toolbar(context, entries.length),
+              Expanded(
+                child: entries.isEmpty
+                    ? Center(
+                        child: Text(
+                          widget.store.entries.isEmpty
+                              ? 'No network calls captured.'
+                              : 'No network calls match the filters.',
+                          style: TextStyle(color: colorScheme.onSurface),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: entries.length,
+                        itemBuilder: (_, index) =>
+                            _NetworkCallTile(record: entries[index]),
                       ),
-                    )
-                  : ListView.builder(
-                      itemCount: entries.length,
-                      itemBuilder: (_, index) =>
-                          _NetworkCallTile(record: entries[index]),
-                    ),
-            ),
-          ],
+              ),
+            ],
+          ),
         );
       },
     );
   }
 
   Widget _toolbar(BuildContext context, int visibleCount) {
+    final colorScheme = Theme.of(context).colorScheme;
     final methods = widget.store.entries
         .map((entry) => entry.method.toUpperCase())
         .toSet()
         .toList()
       ..sort();
     return Material(
-      color: Theme.of(context).colorScheme.surfaceContainerLow,
+      color: colorScheme.surfaceContainer,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(12, 8, 4, 8),
         child: Row(
@@ -81,6 +87,8 @@ class _GrabKitNetworkPanelState extends State<GrabKitNetworkPanel> {
                 controller: _searchController,
                 onChanged: (_) => setState(() {}),
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: colorScheme.surfaceContainerHighest,
                   isDense: true,
                   hintText: 'Search $visibleCount calls',
                   prefixIcon: const Icon(Icons.search),
@@ -95,6 +103,9 @@ class _GrabKitNetworkPanelState extends State<GrabKitNetworkPanel> {
                           icon: const Icon(Icons.close),
                         ),
                   border: const OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: colorScheme.outlineVariant),
+                  ),
                 ),
               ),
             ),
@@ -161,23 +172,31 @@ class _NetworkCallTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = record.isError
-        ? Theme.of(context).colorScheme.error
-        : Theme.of(context).colorScheme.primary;
+    final colorScheme = Theme.of(context).colorScheme;
+    final methodColor =
+        record.isError ? colorScheme.error : colorScheme.onSurfaceVariant;
     return ExpansionTile(
+      iconColor: colorScheme.onSurfaceVariant,
+      collapsedIconColor: colorScheme.onSurfaceVariant,
       leading: SizedBox(
         width: 52,
         child: Text(
           record.method.toUpperCase(),
-          style: TextStyle(color: color, fontWeight: FontWeight.bold),
+          style: TextStyle(color: methodColor, fontWeight: FontWeight.bold),
         ),
       ),
-      title: Text(_shortUrl(record.uri), maxLines: 2),
+      title: Text(
+        _shortUrl(record.uri),
+        maxLines: 2,
+        style: TextStyle(color: colorScheme.onSurface),
+      ),
       subtitle: Text(
         '${record.statusCode ?? '-'} · '
         '${record.duration?.inMilliseconds ?? '-'} ms',
+        style: TextStyle(color: colorScheme.onSurfaceVariant),
       ),
       trailing: PopupMenuButton<_CallAction>(
+        iconColor: colorScheme.onSurfaceVariant,
         tooltip: 'Call actions',
         onSelected: (action) => _runAction(context, action),
         itemBuilder: (_) => const [
@@ -246,9 +265,13 @@ class _Detail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ListTile(
-      title: Text(label),
-      subtitle: SelectableText(value),
+      title: Text(label, style: TextStyle(color: colorScheme.onSurface)),
+      subtitle: SelectableText(
+        value,
+        style: TextStyle(color: colorScheme.onSurfaceVariant),
+      ),
       trailing: IconButton(
         tooltip: 'Copy $label',
         onPressed: () => Clipboard.setData(ClipboardData(text: value)),
