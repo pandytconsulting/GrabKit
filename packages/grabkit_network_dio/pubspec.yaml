@@ -12,9 +12,15 @@ environment:
 dependencies:
   dio: ^5.9.0
   grabkit:
-    path: ../..
+    git:
+      url: https://github.com/pandytconsulting/GrabKit.git
+      ref: integration/git-consumer-test
+      path: .
   grabkit_network:
-    path: ../grabkit_network
+    git:
+      url: https://github.com/pandytconsulting/GrabKit.git
+      ref: integration/git-consumer-test
+      path: packages/grabkit_network
 
 dev_dependencies:
   test: ^1.25.0

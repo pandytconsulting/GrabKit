@@ -15,13 +15,25 @@ dependencies:
   flutter:
     sdk: flutter
   grabkit:
-    path: ../..
+    git:
+      url: https://github.com/pandytconsulting/GrabKit.git
+      ref: integration/git-consumer-test
+      path: .
   grabkit_logs:
-    path: ../grabkit_logs
+    git:
+      url: https://github.com/pandytconsulting/GrabKit.git
+      ref: integration/git-consumer-test
+      path: packages/grabkit_logs
   grabkit_network:
-    path: ../grabkit_network
+    git:
+      url: https://github.com/pandytconsulting/GrabKit.git
+      ref: integration/git-consumer-test
+      path: packages/grabkit_network
   grabkit_realtime:
-    path: ../grabkit_realtime
+    git:
+      url: https://github.com/pandytconsulting/GrabKit.git
+      ref: integration/git-consumer-test
+      path: packages/grabkit_realtime
   package_info_plus: ^8.0.2
   share_plus: ^11.1.0
 

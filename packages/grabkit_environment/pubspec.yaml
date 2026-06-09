@@ -14,7 +14,10 @@ dependencies:
   flutter:
     sdk: flutter
   grabkit:
-    path: ../..
+    git:
+      url: https://github.com/pandytconsulting/GrabKit.git
+      ref: integration/git-consumer-test
+      path: .
 
 dev_dependencies:
   flutter_test:
