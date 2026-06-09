@@ -200,6 +200,7 @@ Read next:
 - [Modular Design](doc/architecture/modular-design.md)
 - [Grab Sessions](doc/product/grab-sessions.md)
 - [Package Map](doc/architecture/package-map.md)
+- [Release Workflow](doc/release-workflow.md)
 
 Contributions are welcome once the public repo is open. Please read
 [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
