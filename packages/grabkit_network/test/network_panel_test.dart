@@ -36,4 +36,35 @@ void main() {
     expect(find.text('Copy cURL'), findsOneWidget);
     expect(find.text('Copy response'), findsOneWidget);
   });
+
+  testWidgets('method labels stay readable in dark host themes',
+      (tester) async {
+    final store = GrabKitNetworkStore()
+      ..add(
+        GrabKitNetworkRecord(
+          at: DateTime(2026),
+          method: 'GET',
+          uri: 'https://example.com/items',
+          statusCode: 200,
+        ),
+      );
+    const scheme = ColorScheme.dark(
+      primary: Colors.black,
+      onSurfaceVariant: Colors.white70,
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: ThemeData(
+          colorScheme: scheme,
+          splashFactory: NoSplash.splashFactory,
+          useMaterial3: true,
+        ),
+        home: Scaffold(body: GrabKitNetworkPanel(store: store)),
+      ),
+    );
+
+    final method = tester.widget<Text>(find.text('GET'));
+    expect(method.style?.color, scheme.onSurfaceVariant);
+  });
 }
