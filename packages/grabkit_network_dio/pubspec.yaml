@@ -1,7 +1,6 @@
 name: grabkit_network_dio
 description: Dio adapter for the GrabKit network inspection module.
 version: 0.1.0
-publish_to: "none"
 homepage: https://github.com/pandytconsulting/GrabKit
 repository: https://github.com/pandytconsulting/GrabKit/tree/main/packages/grabkit_network_dio
 issue_tracker: https://github.com/pandytconsulting/GrabKit/issues
@@ -11,10 +10,8 @@ environment:
 
 dependencies:
   dio: ^5.9.0
-  grabkit:
-    path: ../..
-  grabkit_network:
-    path: ../grabkit_network
+  grabkit: ^0.1.0
+  grabkit_network: ^0.1.0
 
 dev_dependencies:
   test: ^1.25.0
