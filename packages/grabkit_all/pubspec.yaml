@@ -1,0 +1,35 @@
+name: grabkit_all
+description: Convenience bundle containing the standard GrabKit modules.
+version: 0.1.0
+publish_to: "none"
+homepage: https://github.com/pandytconsulting/GrabKit
+repository: https://github.com/pandytconsulting/GrabKit/tree/main/packages/grabkit_all
+issue_tracker: https://github.com/pandytconsulting/GrabKit/issues
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  grabkit:
+    path: ../..
+  grabkit_environment:
+    path: ../grabkit_environment
+  grabkit_export:
+    path: ../grabkit_export
+  grabkit_logs:
+    path: ../grabkit_logs
+  grabkit_network:
+    path: ../grabkit_network
+  grabkit_network_dio:
+    path: ../grabkit_network_dio
+  grabkit_realtime:
+    path: ../grabkit_realtime
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0

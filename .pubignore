@@ -1,0 +1,6 @@
+packages/
+android/
+ios/
+build/
+*.iml
+.DS_Store

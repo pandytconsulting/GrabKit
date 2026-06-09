@@ -1,0 +1,22 @@
+name: grabkit_realtime
+description: Protocol-neutral realtime event inspection module for GrabKit.
+version: 0.1.0
+publish_to: "none"
+homepage: https://github.com/pandytconsulting/GrabKit
+repository: https://github.com/pandytconsulting/GrabKit/tree/main/packages/grabkit_realtime
+issue_tracker: https://github.com/pandytconsulting/GrabKit/issues
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  grabkit:
+    path: ../..
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
